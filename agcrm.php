@@ -32,3 +32,21 @@
  function agcrm_show_content() {
      echo 'Hello';
  }
+
+ // регистрация скриптов
+function agcrm_register_assets(){
+    wp_register_style( 'agcrm_styles', plugins_url( 'assets/css/admin.css', __FILE__ ));
+    wp_register_script( 'agcrm_scripts', plugins_url( 'assets/js/admin.js', __FILE__ ));
+}
+add_action('admin_enqueue_scripts', 'agcrm_register_assets');
+ // подключение скриптов и стилей
+ function agcrm_load_assets($hook){
+
+     if($hook != 'toplevel_page_agcrm-options'){
+         return;
+     }
+
+     wp_enqueue_style( 'agcrm_styles' );
+     wp_enqueue_script( 'agcrm_scripts' );
+ }
+ add_action('admin_enqueue_scripts', 'agcrm_load_assets');
