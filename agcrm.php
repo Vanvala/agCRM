@@ -28,9 +28,17 @@
  }
  
  add_action('admin_menu', 'agcrm_show_nav_item');
+// подгрузка языковых пакетов
+function agcrm_load_plugin_textdomain(){
+    load_plugin_textdomain('agcrm', FALSE, basename( dirname(__FILE__)) .'/lang/' );
+}
+add_action('plugin_loaded', 'agcrm_load_plugin_textdomain');
+
 // вывод тела страницы
  function agcrm_show_content() {
-     echo 'Hello';
+     _e( 'Hello', 'agcrm'); # translation
+
+     echo '<br>' . esc_html__('First', 'agcrm');
  }
 
  // регистрация скриптов
